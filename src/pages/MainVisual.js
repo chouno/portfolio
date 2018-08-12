@@ -1,39 +1,111 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { BackgroundSlide } from "../componemt/BackgroundSlide";
+import { BackgroundScreen } from "../componemt/BackgroundScreen";
+
+
 
 export class MainVisual extends Component {
   constructor(props) {
       super(props);
       this.nameAnmation = this.nameAnmation.bind(this);
       this.expandAnimation = this.expandAnimation.bind(this);
+      this.playOnClick = this.playOnClick.bind(this)
+      this.lastSelectedPlayValue = false;
+      this.performanceMouseEventHander = this.performanceMouseEventHander.bind(this)
+      this.performances = ['ttf',
+                          'seto',
+                          'shimogamo',
+                          'chrono',
+                          'dashboard']
       this.state = {
-        'isExpand':false,
+        'isExpand':true,
+        'autoPlay':false,
+        'horizontal':false,
         'ttf':false,
         'seto':false,
         'shimogamo':false,
         'chrono':false,
-        'dashboard':false
+        'dashboard':false,
+        'photos':[],
+        'isShow':false,
+        'currentSlide':[]
       };
   };
   changeSlide(targetName,isShow){
-    if(targetName=='ttf'){
-      this.setState({'ttf':isShow})
-    }else if(targetName=='seto'){
-      this.setState({'seto':isShow})
-    }else if(targetName=='shimogamo'){
-      this.setState({'shimogamo':isShow})
-    }else if(targetName=='chrono'){
-      this.setState({'chrono':isShow})
-    }else if(targetName=='dashboard'){
-      this.setState({'dashboard':isShow})
+    
+    switch (targetName) {
+      case 'ttf':
+        this.setState({'currentSlide':isShow?this.props.ttfSlides:[]});
+        this.setState({'ttf':isShow});
+        break;
+      case 'seto':
+        this.setState({'currentSlide':isShow?this.props.setoSlides:[]});
+        this.setState({'seto':isShow})
+        break;
+      case 'shimogamo':
+        this.setState({'currentSlide':isShow?this.props.shimogamoSlides:[]});
+        this.setState({'shimogamo':isShow})
+        break;
+      case 'chrono':
+        this.setState({'currentSlide':isShow?this.props.chronoSlides:[]});
+        this.setState({'chrono':isShow})
+        break;
+      case 'dashboard':
+        this.setState({'currentSlide':isShow?this.props.dashboardSlides:[]});
+        this.setState({'dashboard':isShow})
+        break;
+      default:
+        break;
     }
+    this.currentSlide = isShow?targetName:''
   }
 
   componentWillAppear(done){
   }
   componentDidMount(done) {
     this.nameAnmation()
+  }
+
+  playOnClick(){
+    this.setState({"autoPlay":!this.state.autoPlay})
+    const nextValue = !this.state.autoPlay
+    if(nextValue){
+      this.setState({'isExpand':false})
+      this.nextPlay()
+    }else{
+      this.changeSlide(this.currentSlide,false)
+      this.expandAnimation()
+    }
+  }
+
+  performanceMouseEventHander(target,value){
+    this.setState({'horizontal':value});
+    this.expandAnimation()
+    this.changeSlide(target,value)
+  }
+
+  nextPlay(){
+    if(!this.currentSlide||this.currentSlide==''){
+      this.currentSlide='dashboard'
+    }
+    let nextValue = ''
+    const currentValue = this.currentSlide
+    this.performances.some((target,index)=>{
+      if(target==currentValue){
+        if(index==4){
+          nextValue=this.performances[0]
+        }else{
+          nextValue=this.performances[index+1]
+        }
+        return true
+      }
+    })
+    this.changeSlide(this.currentSlide,false)
+    this.changeSlide(nextValue,true)
+    this.currentSlide=nextValue
+    // setTimeout((()=>{
+    //   this.nextPlay()
+    // }),2000);
   }
 
   expandAnimation(){
@@ -77,77 +149,103 @@ export class MainVisual extends Component {
   render() {
     return (
       <div className={this.state.ttf?'wrapper ttf_slide':'wrapper'}>
-        <BackgroundSlide
-        ttf={this.state.ttf}
-        seto={this.state.seto}
-        shimogamo={this.state.shimogamo}
-        chrono={this.state.chrono}
-        dashboard={this.state.dashboard}/>
+        <BackgroundScreen
+        autoPlay={this.state.autoPlay}
+        nextPlay={()=>this.nextPlay()}
+        photos={this.state.currentSlide}
+        />
+        {/* <HeaderPhoto
+          images={this.state.photos}
+          show={this.state.isShow}
+        /> */}
         <section className="sign">
           <h1 id='targetName' className='userName' onClick={this.nameAnmation}>chouno yukihiko</h1>
           <p id='portfolio' className='portfolio_title'>Portfolio</p>
           <button className={this.state.isExpand?'expand_button selected':'expand_button'} onClick={this.expandAnimation}>
           </button>
+          <button className={this.state.autoPlay?'play_button stop':'play_button'} onClick={this.playOnClick}>
+          </button>
         </section>
-        <ul className='performance_container from_small'>
+        <ul className={this.state.autoPlay?'performance_container horizontal from_small':'performance_container from_small'}>
           <li className={this.state.isExpand?'expand':''}>
-            <Link to="/TTFConverter">
-              <figure className='ttf_figure'
-               onMouseEnter={()=>this.changeSlide('ttf',true)}
-               onMouseLeave={()=>this.changeSlide('ttf',false)}>
-                <p>TTFConverter
-                <br/>
-                  <span>Webフォント作成アプリ</span>
-                </p>
-              </figure>
-            </Link>
+            <div className={this.state.shimogamo?'moveBox hover':'moveBox'}>
+              <div className='case'>
+                <Link to="/shimogamodeli">
+                <figure className={this.state.shimogamo?'shimogamo_figure hover':'shimogamo_figure'}
+                  onMouseEnter={()=>this.performanceMouseEventHander('shimogamo',true)}
+                  onMouseLeave={()=>this.performanceMouseEventHander('shimogamo',false)}>
+                    <p>設計・コーディング
+                    <br/>
+                      <span>ホームページ作成</span>
+                    </p>
+                  </figure>
+                </Link>
+              </div>
+            </div>
           </li>
           <li className={this.state.isExpand?'expand':''}>
-            <Link to="/setogreenEstate">
-              <figure className='seto_figure'
-              onMouseEnter={()=>this.changeSlide('seto',true)}
-              onMouseLeave={()=>this.changeSlide('seto',false)}>
-                <p>瀬戸グリーン不動産
-                <br/>
-                  <span>不動産検索エンジン</span>
-                </p>
-              </figure>
-            </Link>
+              <div className={this.state.ttf?'moveBox hover':'moveBox'}>
+                <div className='case'>
+                  <Link to="/TTFConverter">
+                    <figure className={this.state.ttf?'ttf_figure hover':'ttf_figure'}
+                    onMouseEnter={()=>this.performanceMouseEventHander('ttf',true)}
+                    onMouseLeave={()=>this.performanceMouseEventHander('ttf',false)}>
+                      <p>Webフォント生成
+                      <br/>
+                        <span>ttf→Web用ファイル一式</span>
+                      </p>
+                    </figure>
+                  </Link>
+                </div>
+              </div>
           </li>
           <li className={this.state.isExpand?'expand':''}>
-            <Link to="/shimogamodeli">
-              <figure className='shimogamo_figure'
-              onMouseEnter={()=>this.changeSlide('shimogamo',true)}
-              onMouseLeave={()=>this.changeSlide('shimogamo',false)}>
-                <p>下鴨デリ
-                <br/>
-                  <span>デリカフェのホームページ</span>
-                </p>
-              </figure>
-            </Link>
+            <div className='moveBox'>
+              <div className='case'>
+                <Link to="/setogreenEstate">
+                <figure className={this.state.seto?'seto_figure hover':'seto_figure'}
+                  onMouseEnter={()=>this.performanceMouseEventHander('seto',true)}
+                  onMouseLeave={()=>this.performanceMouseEventHander('seto',false)}>
+                    <p>物件検索エンジン
+                    <br/>
+                      <span>不動産ホームページ</span>
+                    </p>
+                  </figure>
+                </Link>
+              </div>
+            </div>
           </li>
           <li className={this.state.isExpand?'expand':''}>
-            <Link to="/chronograph">
-              <figure className='chrono_figure'
-              onMouseEnter={()=>this.changeSlide('chrono',true)}
-              onMouseLeave={()=>this.changeSlide('chrono',false)}>
-                <p>会社年表<br/>
-                  <span>社内研修用の年表</span>
-                </p>
-              </figure>
-            </Link>
+            <div className='moveBox'>
+              <div className='case'>
+                <Link to="/chronograph">
+                <figure className={this.state.chrono?'chrono_figure hover':'chrono_figure'}
+                  onMouseEnter={()=>this.performanceMouseEventHander('chrono',true)}
+                  onMouseLeave={()=>this.performanceMouseEventHander('chrono',false)}>
+                    <p>3Dアニメーション<br/>
+                      <span>年表を3Dで
+                      </span>
+                    </p>
+                  </figure>
+                </Link>
+              </div>
+            </div>
           </li>
           <li className={this.state.isExpand?'expand':''}>
-            <Link to="/dashboard">
-              <figure className='dashboard_figure'
-              onMouseEnter={()=>this.changeSlide('dashboard',true)}
-              onMouseLeave={()=>this.changeSlide('dashboard',false)}>
-                <p>ダッシュボード
-                <br/>
-                  <span>分析用管理画面のサンプル</span>
-                </p>
-              </figure>
-            </Link>
+            <div className={this.state.dashboard?'moveBox hover':'moveBox'}>
+              <div className='case'>
+                <Link to="/dashboard">
+                <figure className={this.state.dashboard?'dashboard_figure hover':'dashboard_figure'}
+                    onMouseEnter={()=>this.performanceMouseEventHander('dashboard',true)}
+                    onMouseLeave={()=>this.performanceMouseEventHander('dashboard',false)}>
+                    <p>データの可視化
+                    <br/>
+                      <span>分析用ダッシュボード</span>
+                    </p>
+                  </figure>
+                </Link>
+              </div>
+            </div>
           </li>
         </ul>
       </div>

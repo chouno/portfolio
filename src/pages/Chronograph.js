@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { DetailDescription } from "../componemt/DetailDescription";
 
 export class Chronograph extends Component {
   render() {
+    const frameworks = ['HTML','javaScript','jQuery','CSS']
     return (
       <div className="">
        <ul>
@@ -10,7 +12,11 @@ export class Chronograph extends Component {
               <Link to="/">戻る</Link>
           </li>
         </ul>
-        <h1>chrono</h1>
+        <DetailDescription
+          title='会社年表'
+          frameworks={frameworks}
+          captures={this.props.captures}
+        />
       </div>
     );
   }
