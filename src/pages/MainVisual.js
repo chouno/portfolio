@@ -37,23 +37,24 @@ export class MainVisual extends Component {
   };
 
   componentDidMount(done) {
-    $.ajax({
-      url:'performance.json',
-      type:'GET',
-      dataType:'json',
-      data:"",
-      timeout:5000
-    })
-    .then((...args)=>{
-      const [res,textStatus,jqXHR] = args;  
-      visualizeTarget = res;
-      this.setState({'name':res.name});
-      this.nameAnmation()
-    })
-    .fail((...args)=>{
-      const [res,textStatus,jqXHR] = args;
-      console.log('user data not available >> ' + jqXHR.status);
-    })
+    // $.ajax({
+    //   url:'performance.json',
+    //   type:'GET',
+    //   dataType:'json',
+    //   data:"",
+    //   timeout:5000
+    // })
+    // .then((...args)=>{
+    //   const [res,textStatus,jqXHR] = args;  
+    //   visualizeTarget = res;
+    //   this.setState({'name':res.name});
+    //   this.nameAnmation()
+    // })
+    // .fail((...args)=>{
+    //   const [res,textStatus,jqXHR] = args;
+    //   console.log('user data not available >> ' + jqXHR.status);
+    // })
+    this.nameAnmation();
   }
 
   changeSlide(targetName,isShow){
@@ -186,7 +187,7 @@ export class MainVisual extends Component {
         photos={this.state.currentSlide}
         />
         <section className="sign">
-          <h1 id='targetName' className='userName' onClick={this.nameAnmation}>{this.state.name}</h1>
+          <h1 id='targetName' className='userName' onClick={this.nameAnmation}>chouno yukihiko</h1>
           <p id='portfolio' className='portfolio_title'>Portfolio</p>
           <button className={this.state.isExpand?'expand_button selected':'expand_button'} onClick={this.expandAnimation}>
           </button>
@@ -212,88 +213,6 @@ export class MainVisual extends Component {
           dashboardOnMouseEnter={()=>this.performanceMouseEventHander('dashboard',true)}
           dashboardOnMouseLeave={()=>this.performanceMouseEventHander('dashboard',false)}
         />
-        {/* <ul className={this.state.autoPlay?'performance_container horizontal from_small':'performance_container from_small'}>
-          <li className={this.state.isExpand?'expand':''}>
-            <div className={this.state.shimogamo?'moveBox hover':'moveBox'}>
-              <div className='case'>
-                <Link to="/shimogamodeli">
-                <figure className={this.state.shimogamo?'shimogamo_figure hover':'shimogamo_figure'}
-                  onMouseEnter={()=>this.performanceMouseEventHander('shimogamo',true)}
-                  onMouseLeave={()=>this.performanceMouseEventHander('shimogamo',false)}>
-                    <p>設計・コーディング
-                    <br/>
-                      <span>ホームページ作成</span>
-                    </p>
-                  </figure>
-                </Link>
-              </div>
-            </div>
-          </li>
-          <li className={this.state.isExpand?'expand':''}>
-              <div className={this.state.ttf?'moveBox hover':'moveBox'}>
-                <div className='case'>
-                  <Link to="/TTFConverter">
-                    <figure className={this.state.ttf?'ttf_figure hover':'ttf_figure'}
-                    onMouseEnter={()=>this.performanceMouseEventHander('ttf',true)}
-                    onMouseLeave={()=>this.performanceMouseEventHander('ttf',false)}>
-                      <p>Webフォント生成
-                      <br/>
-                        <span>ttf→Web用ファイル一式</span>
-                      </p>
-                    </figure>
-                  </Link>
-                </div>
-              </div>
-          </li>
-          <li className={this.state.isExpand?'expand':''}>
-            <div className='moveBox'>
-              <div className='case'>
-                <Link to="/setogreenEstate">
-                <figure className={this.state.seto?'seto_figure hover':'seto_figure'}
-                  onMouseEnter={()=>this.performanceMouseEventHander('seto',true)}
-                  onMouseLeave={()=>this.performanceMouseEventHander('seto',false)}>
-                    <p>物件検索エンジン
-                    <br/>
-                      <span>不動産ホームページ</span>
-                    </p>
-                  </figure>
-                </Link>
-              </div>
-            </div>
-          </li>
-          <li className={this.state.isExpand?'expand':''}>
-            <div className='moveBox'>
-              <div className='case'>
-                <Link to="/chronograph">
-                <figure className={this.state.chrono?'chrono_figure hover':'chrono_figure'}
-                  onMouseEnter={()=>this.performanceMouseEventHander('chrono',true)}
-                  onMouseLeave={()=>this.performanceMouseEventHander('chrono',false)}>
-                    <p>3Dアニメーション<br/>
-                      <span>年表を3Dで
-                      </span>
-                    </p>
-                  </figure>
-                </Link>
-              </div>
-            </div>
-          </li>
-          <li className={this.state.isExpand?'expand':''}>
-            <div className={this.state.dashboard?'moveBox hover':'moveBox'}>
-              <div className='case'>
-                <Link to="/dashboard">
-                <figure className={this.state.dashboard?'dashboard_figure hover':'dashboard_figure'}
-                    onMouseEnter={()=>this.performanceMouseEventHander('dashboard',true)}
-                    onMouseLeave={()=>this.performanceMouseEventHander('dashboard',false)}>
-                    <p>集計データの可視化
-                    <br/>
-                      <span>分析用ダッシュボード</span>
-                    </p>
-                  </figure>
-                </Link>
-              </div>
-            </div>
-          </li>
-        </ul> */}
       </div>
     );
   }
