@@ -4,10 +4,11 @@ import ClassNames from "classnames";
 export class CaptureImage extends Component {
     constructor(props) {
         super(props);
+        
         this.state = {
-            expand:false,
+            expand:true,
             shrink:false,
-            show:false
+            show:true
         };
     };
     componentDidMount(){
@@ -23,7 +24,7 @@ export class CaptureImage extends Component {
     }
 
     delete(){
-
+        this.setState({'show':false});
     }
 
     render() {
@@ -31,14 +32,17 @@ export class CaptureImage extends Component {
             'pc',
             {
                 'from_bottom':this.props.show,
-                'expand':this.state.expand
+                'expand':this.state.expand,
+                'notDisplay':!this.state.show
             }
         )
         return(
-            <div className={pcState}>
+            <div id={this.props.captureID} className={pcState}>
                 <span onClick={()=>this.delete()}></span>
                 <span onClick={()=>this.shrink()}></span>
-                <span onClick={()=>this.expand()}></span>
+                {/* <a href={'#'+this.props.captureID}> */}
+                    <span onClick={()=>this.expand()}></span>
+                {/* </a> */}
                 <img src={this.props.target}/>
             </div>
         )

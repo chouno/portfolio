@@ -1,4 +1,6 @@
 import React, { } from 'react';
+// import {Provider} from 'react-redux'
+// import store from './Store'
 import { BrowserRouter, Route } from 'react-router-dom'
 import './assets/css/reset.css';
 import './assets/css/main.css';
@@ -44,9 +46,12 @@ const chronoSlides = [chrono1,chrono2,chrono3,chrono4,chrono5]
 const dashboardSlides = [dashboard1,dashboard2,dashboard3,dashboard4,dashboard5]
 
 const App = () => (
+  // <Provider>
+  //   <BrowserRouter store={store} >
   <BrowserRouter>
     <div className='background_frame'>
       <Route exact path='/' component={Home} />
+      <Header/>
       <Route path='/TTFConverter' component={Sample1} />
       <Route path='/setogreenEstate' component={Sample2} />
       <Route path='/shimogamodeli' component={Sample3} />
@@ -54,7 +59,16 @@ const App = () => (
       <Route path='/dashboard' component={Sample5} />
     </div>
   </BrowserRouter>
+  // </Provider>
 )
+
+const Header = () => ({
+  render(){
+    return(
+      <div className>aaaa</div>
+    )
+  }
+})
 
 const Home = () => (
   <MainVisual 

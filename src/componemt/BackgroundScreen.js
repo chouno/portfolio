@@ -31,7 +31,7 @@ export class BackgroundScreen extends Component {
                     currentImage: (this.state.currentImage + 1 < this.props.photos.length) ? this.state.currentImage + 1:0
                 })
                 this.autoSlidePhoto();
-            }.bind(this), 3000)
+            }.bind(this), 1600)
         }
     }
     
@@ -39,7 +39,7 @@ export class BackgroundScreen extends Component {
         if(this.props.photos&&this.props.photos.length>0){
             if(lastDisplayPhotos!=this.props.photos){
                 lastDisplayPhotos = this.props.photos
-                //start slide
+                //start
                 isFirstSlide = true;
                 clearTimeout(this.timeoutFunc);
                 this.autoSlidePhoto()
@@ -52,7 +52,6 @@ export class BackgroundScreen extends Component {
     }
 
     render() {
-        console.log('render');
         if(this.props.photos&&this.props.photos.length>0){
             let sliderClass = ClassNames(
                 'slide_container',

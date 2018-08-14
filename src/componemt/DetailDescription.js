@@ -6,12 +6,11 @@ export class DetailDescription extends Component{
         super(props);
         this.handleScroll = this.handleScroll.bind(this);
         this.state = {
-
+            delete:false
         };
       }
       
       handleScroll(event) {
-        //Todo 要素が見える時に表示するアニメーション
       };
 
       componentDidMount() {
@@ -27,19 +26,36 @@ export class DetailDescription extends Component{
     render (){
         // let convertTarget = this.props.data.description;
         // const enter = '\n';
+        const targetIndex = this.props.data.main||0;
+        const color = this.props.data.color||'#000';
+        const plusStyle = {
+            display:this.props.data.frameworks?'block':'none'
+        }
         return(
             <div className='detail_wrapper'>
-                <h1 className='detail_title'>{this.props.data.title}</h1>
+                <div className='header_keyvisual'
+                 style={{
+                    backgroundImage: `url(${this.props.data.captures[targetIndex]})`,
+                    borderBottomColor:color
+                  }}
+                 ></div>
+                <h1 className='detail_title from_bottom_instantry'>{this.props.data.title}</h1>
                 <section className='framework_container'>
-                <p className='language'>{this.props.data.language}</p>
-                <p className='frameworks'>{this.props.data.frameworks}</p>
-                <p className='description'>{this.props.data.description}</p>
+                    <p className='language'>{this.props.data.language}</p>
+                    <p style={plusStyle}>+</p>
+                    <p className='frameworks'>{this.props.data.frameworks}</p>
+                    <p className='description'>{this.props.data.description}</p>
                 </section>
-                {this.props.data.captures.map((target,index) => {
-                    return(
-                        <CaptureImage target={target} key={index.toString()}/>
-                    )  
-                })}
+                <div className='pc_wrapper'>
+                    {this.props.data.captures.map((target,index) => {
+                        return(
+                            <CaptureImage
+                            captureID={'capture'+(index+1)}
+                            target={target} 
+                            key={index.toString()}/>
+                        )  
+                    })}
+                </div>
             </div>
         )
     }

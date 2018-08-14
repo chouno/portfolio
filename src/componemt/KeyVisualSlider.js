@@ -1,6 +1,6 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import ClassNames from 'classnames'
-import $ from "jquery";
+import $ from 'jquery';
 
 const scroll_event = 'onwheel' in document ? 'wheel' : 'onmousewheel' in document ? 'mousewheel' : 'DOMMouseScroll';
 const dispnone = {

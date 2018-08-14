@@ -9,23 +9,19 @@ const frameworks = []
 export class TTFConverter extends Component {
   render() {
     const data = {
-      title:'TTFConverter',
-      frameworks:[],
+      title:'Webフォント生成',
+      frameworks:'',
+      appName:'TTFConverter',
       language:'HTML\nJavaScript\nCSS',
-      description:'ローカルのTTFファイルをブラウザにドラッグ&ドロップ\n解析したデータからwoff、eot、svg、CSSファイルを生成\nダウンロードまでをJavaScriptでコントロールするWebアプリケーション',
+      color:'#333',
+      main:1,
+      description:'ローカルのTTFファイルをブラウザにドラッグ&ドロップ\n解析したデータからwoff、eot、svg、CSSファイルを生成し、Zip圧縮\nダウンロードまでをJavaScriptでコントロールするWebアプリケーション',
       captures:this.props.captures
     };
     return (
-      <div className="">
-       <ul>
-          <li>
-              <Link to="/">戻る</Link>
-          </li>
-        </ul>
         <DetailDescription
           data={data}
         />
-      </div>
     );
   }
 }

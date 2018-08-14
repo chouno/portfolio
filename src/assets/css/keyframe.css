@@ -49,10 +49,46 @@
     0% {
         transform :translate3d(0px, 20px, 0px);
         opacity: 0;
+        pointer-events: none;
+        cursor: inherit;
+    }
+    99% {
+        cursor: inherit;
+        pointer-events: none;
     }
     100% {
         transform :translate3d(0px, 0px, 0px);
         opacity: 1;
+        pointer-events: inherit;
+    }
+}
+
+@-webkit-keyframes from_bottom_deep {
+    0% {
+        -webkit-transform :translate3d(0px, 120px, 0px);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform :translate3d(0px, 0px, 0px);
+        opacity: 1;
+    }
+}
+
+@keyframes from_bottom_deep{
+    0% {
+        transform :translate3d(0px, 120px, 0px);
+        opacity: 0;
+        pointer-events: none;
+        cursor: inherit;
+    }
+    50% {
+        transform :translate3d(0px, 80px, 0px);
+        opacity: 0;
+    }
+    100% {
+        transform :translate3d(0px, 0px, 0px);
+        opacity: 1;
+        pointer-events: inherit;
     }
 }
 
@@ -67,6 +103,20 @@
             animation-iteration-count:1;
     -webkit-animation-fill-mode:forwards;
             animation-fill-mode:forwards;
+}
+
+.from_bottom_instantry {
+    -webkit-animation-name:from_bottom_deep;
+            animation-name:from_bottom_deep;
+    -webkit-animation-duration:0.2s;
+            animation-duration:0.2s;
+    -webkit-animation-delay: 0s;
+            animation-delay: 0s;
+    -webkit-animation-iteration-count:1;
+            animation-iteration-count:1;
+    -webkit-animation-fill-mode:forwards;
+            animation-fill-mode:forwards;
+    /* animation-timing-function: ease-in-out; */
 }
 
 @-webkit-keyframes from_small {

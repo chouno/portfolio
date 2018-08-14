@@ -1,8 +1,12 @@
 :root {
-	--box_size: 16px;
+	--box_size: 0px;
 	--box_size_L: 200px;
 	--small_scale: 1;
 	--tltle_trans_y: -44%;
+}
+
+.notDisplay{
+	display: none!important;
 }
 
 .hidden{
@@ -21,13 +25,14 @@
 	display: inline-block;
 	font-size: 34px;
 	color: #222;
-	height: 60px;
+	height: 50px;
 	cursor: pointer;
 }
 .portfolio_title {
-	font-size: 28px;
+	font-size: 24px;
+	font-weight: bold;
 	opacity: 0;
-	color: #666;
+	color: #999;
 }
 
 .play_button{
@@ -53,7 +58,7 @@
 	animation-iteration-count: 1;
 	-webkit-animation-fill-mode: forwards;
 	animation-fill-mode: forwards;
-	display: none;
+	/* display: none; */
 }
 
 .play_button.stop{
@@ -103,6 +108,10 @@
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	pointer-events: none;
+}
+.wrapper.initialized{
+	pointer-events: inherit;
 }
 .background_frame {
 	position: fixed;
@@ -137,7 +146,7 @@
 	width: var(--box_size);
 	height: var(--box_size);
 	background: white;
-	border: 8px solid black;
+	border: 6px solid black;
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -212,6 +221,7 @@
 	-webkit-animation-fill-mode: forwards;
 	animation-fill-mode: forwards;
 }
+/* TODO クラス依存ではなくデータから色を受け取って表示する */
 .ttf_figure.hover,
 .performance_container li.expand figure.ttf_figure {
 	border-color: #333;
@@ -232,7 +242,7 @@
 .performance_container li.expand figure.dashboard_figure {
 	border-color: #368DC3;
 }
-
+/* TODO クラス依存ではなくデータから色を受け取って表示する ここまで*/
 .performance_container li:nth-child(1) {
 	grid-column: 1/2;
 }
@@ -250,22 +260,22 @@
 }
 
 /* スライドショー用 */
-/* .performance_container.horizontal li:nth-child(2n+1) .moveBox{
+.performance_container.horizontal li:nth-child(2n+1) .moveBox{
 	transform: translateX(-50%) translateY(100%);
 }
 
 .performance_container.horizontal li:nth-child(2n+1) .case{
 	transform:translateY(-100%);
-} */
+}
 
-/* .performance_container li:nth-child(2n+1):not(.expand) .moveBox:not(.hover){
+.performance_container li:nth-child(2n+1):not(.expand) .moveBox:not(.hover){
 	transform: translateX(-50%) translateY(100%);
 }
 
 .performance_container li:nth-child(2n+1):not(.expand) .moveBox:not(.hover) .case{
 	transform:translateY(-100%);
-} */
-
+}
+/* スライドショー用 ここまで*/
 @media (max-width: 767px) {
 	.wrapper {
 		display: block;
@@ -290,6 +300,7 @@
 		border: 6px solid;
 		box-sizing: border-box;
 	}
+	/* TODO クラス依存ではなくデータから色を受け取って表示する start*/
 	.performance_container li figure.ttf_figure {
 		border-color: #333;
 	}
@@ -305,6 +316,7 @@
 	.performance_container li figure.dashboard_figure {
 		border-color: #368DC3;
 	}
+	/* TODO クラス依存ではなくデータから色を受け取って表示する end*/
 	.ttf_figure:hover p,
 	.seto_figure:hover p,
 	.shimogamo_figure:hover p,
@@ -337,7 +349,7 @@
 	}
 
 	.performance_container.horizontal li:nth-child(2n+1) .moveBox{
-		transform: translateX(-50%) translateY(0);
+		transform: translateX(-50%) translateY(0px);
 	}
 	
 	.performance_container.horizontal li:nth-child(2n+1) .case{
@@ -351,6 +363,35 @@
 	
 	.performance_container li:nth-child(2n) .case{
 		bottom:auto;
+	}
+
+	/* スライド用 */
+	.performance_container.horizontal li:nth-child(2n+1) .moveBox{
+		transform: translateX(-50%) translateY(0%);
+	}
+	
+	.performance_container.horizontal li:nth-child(2n+1) .case{
+		transform:translateY(0%);
+	}
+
+	.performance_container li:nth-child(2n+1):not(.expand) .moveBox:not(.hover){
+		transform: translateX(-50%) translateY(0);
+	}
+	
+	.performance_container li:nth-child(2n+1):not(.expand) .moveBox:not(.hover) .case{
+		transform:translateY(-50%);
+	}
+	/* スライド用ここまで */
+	
+	/* 2018.08.14追加 */
+	.ttf_figure.hover p,
+	.seto_figure.hover p,
+	.shimogamo_figure.hover p,
+	.chrono_figure.hover p,
+	.dashboard_figure.hover p,
+	.performance_container li.expand figure p {
+		-webkit-animation-name: none;
+		animation-name: none;
 	}
 }
 @media (max-width: 467px) {}
