@@ -2,7 +2,7 @@
   "name": "portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://chouno.github.io/portfolio",
+  "homepage": "https://chouno.github.io/portfolio",
   "dependencies": {
     "classnames": "^2.2.6",
     "jquery": "^3.3.1",
