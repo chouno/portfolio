@@ -1,31 +1,27 @@
 import React, { Component } from "react";
 import { CaptureImage } from "./CaptureImage";
-let convertTarget;
 export class DetailDescription extends Component{
     constructor(props) {
-        super(props);
+    super(props);
         this.handleScroll = this.handleScroll.bind(this);
         this.state = {
             delete:false
         };
-      }
-      
-      handleScroll(event) {
-      };
+    }
+    
+    handleScroll(event) {
+    };
 
-      componentDidMount() {
-        this.eventHandler = this.handleScroll.bind(this);
-        window.addEventListener('scroll', this.eventHandler,true);
-        // convertTarget = 
-      };
-      
-      componentWillUnmount() {
-        window.removeEventListener('scroll', this.eventHandler,true);
-      };
+    componentDidMount() {
+        //this.eventHandler = this.handleScroll.bind(this);
+        //window.addEventListener('scroll', this.eventHandler,true);
+    };
+    
+    componentWillUnmount() {
+        // window.removeEventListener('scroll', this.eventHandler,true);
+    };
 
     render (){
-        // let convertTarget = this.props.data.description;
-        // const enter = '\n';
         const targetIndex = this.props.data.main||0;
         const color = this.props.data.color||'#000';
         const plusStyle = {
@@ -39,7 +35,7 @@ export class DetailDescription extends Component{
                     borderBottomColor:color
                   }}
                  ></div>
-                <h1 className='detail_title from_bottom_instantry'>{this.props.data.title}</h1>
+                <h1 className='detail_title'>{this.props.data.title}</h1>
                 <section className='framework_container'>
                     <p className='language'>{this.props.data.language}</p>
                     <p style={plusStyle}>+</p>

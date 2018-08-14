@@ -64,7 +64,7 @@ export class BackgroundScreen extends Component {
             }
             return (
                 <figure className={sliderClass}
-                style={{
+                  style={{
                     backgroundImage: `url(${this.props.photos[this.state.currentImage]})`
                   }}
                 >

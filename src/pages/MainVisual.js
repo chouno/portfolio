@@ -95,41 +95,38 @@ export class MainVisual extends Component {
     const nextValue = !this.state.autoPlay
     if(nextValue){
       this.setState({'isExpand':false})
-      this.nextPlay()
+      this.nextPlay();
     }else{
       this.changeSlide(this.currentSlide,false)
-      this.expandAnimation()
+      this.expandAnimation();
     }
   }
 
   performanceMouseEventHander(target,value){
     this.setState({'horizontal':value});
-    this.expandAnimation()
-    this.changeSlide(target,value)
+    this.expandAnimation();
+    this.changeSlide(target,value);
   }
 
   nextPlay(){
     if(!this.currentSlide||this.currentSlide==''){
-      this.currentSlide='dashboard'
+      this.currentSlide='dashboard';
     }
     let nextValue = ''
     const currentValue = this.currentSlide
     this.performances.some((target,index)=>{
       if(target==currentValue){
         if(index==4){
-          nextValue=this.performances[0]
+          nextValue=this.performances[0];
         }else{
-          nextValue=this.performances[index+1]
+          nextValue=this.performances[index+1];
         }
-        return true
+        return true;
       }
     })
-    this.changeSlide(this.currentSlide,false)
-    this.changeSlide(nextValue,true)
-    this.currentSlide=nextValue
-    // setTimeout((()=>{
-    //   this.nextPlay()
-    // }),2000);
+    this.changeSlide(this.currentSlide,false);
+    this.changeSlide(nextValue,true);
+    this.currentSlide=nextValue;
   }
 
   expandAnimation(){
@@ -141,13 +138,13 @@ export class MainVisual extends Component {
     portfolio.classList.remove('from_bottom');
     let SPY = function(t) {
       function e(a, d, b,t6) {
-        function gogo(targetK,targetT){
+        function complateProccess(targetK,targetT){
           targetK.animationComplete = !0;
-          targetT.setState({'initialized':true});
+          // targetT.setState({'initialized':true});
+          targetT();
         }
         var c, f, g, h;
-        // b == a.length ? k.animationComplete = !0 : (g = d.innerHTML, h = Math.floor(21 * Math.random() + 5), c = 32 == a[b] ? 32 : a[b] - h, f = setInterval(function() {
-          b == a.length ? gogo(k,t6) : (g = d.innerHTML, h = Math.floor(21 * Math.random() + 5), c = 32 == a[b] ? 32 : a[b] - h, f = setInterval(function() {
+          b == a.length ? complateProccess(k,t6) : (g = d.innerHTML, h = Math.floor(21 * Math.random() + 5), c = 32 == a[b] ? 32 : a[b] - h, f = setInterval(function() {
           d.innerHTML = g + String.fromCharCode(c);
           c == a[b] ? (clearInterval(f), c = 32, b++, setTimeout(function() {
             e(a, d, b,t6);
@@ -166,7 +163,11 @@ export class MainVisual extends Component {
       }};
     }();
     
-    SPY.text('targetName',this)
+    const test = () => {
+      this.setState({'initialized':true});
+    }
+
+    SPY.text('targetName',test)
     setTimeout(() => {
       portfolio.classList.add('from_bottom');
     }, 100);

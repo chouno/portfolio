@@ -1,7 +1,9 @@
-import React, { } from 'react';
+import React, { Component } from 'react';
 // import {Provider} from 'react-redux'
 // import store from './Store'
+import ScrollTop from "./componemt/ScrollTop";
 import { BrowserRouter, Route } from 'react-router-dom'
+import ReactCSSTransitionGroup from 'react-transition-group/CSSTransition';
 import './assets/css/reset.css';
 import './assets/css/main.css';
 import './assets/css/keyframe.css';
@@ -14,6 +16,7 @@ import {Setogreen} from './pages/Setogreen';
 import {Shimogamodeli} from './pages/Shimogamodeli';
 import {Chronograph} from './pages/Chronograph';
 import {Dashboard} from './pages/Dashboard';
+import Header from "./componemt/Header";
 import ttf1 from './assets/img/ttf/drop.png';
 import ttf2 from './assets/img/ttf/droped.png';
 import ttf3 from './assets/img/ttf/top.png';
@@ -44,60 +47,93 @@ const setoSlides = [seto1,seto2,seto3,seto4,seto5]
 const shimogamoSlides = [shimogamo1,shimogamo2,shimogamo3,shimogamo4,shimogamo5]
 const chronoSlides = [chrono1,chrono2,chrono3,chrono4,chrono5]
 const dashboardSlides = [dashboard1,dashboard2,dashboard3,dashboard4,dashboard5]
+const rootPath = '/';
+const ttfPath = '/TTFConverter';
+const setoPath = '/setogreenEstate';
+const shimogamoPath = '/shimogamodeli';
+const chronographPath = '/chronograph';
+const dashboardPath = '/dashboard';
 
-const App = () => (
-  // <Provider>
-  //   <BrowserRouter store={store} >
-  <BrowserRouter>
-    <div className='background_frame'>
-      <Route exact path='/' component={Home} />
-      <Header/>
-      <Route path='/TTFConverter' component={Sample1} />
-      <Route path='/setogreenEstate' component={Sample2} />
-      <Route path='/shimogamodeli' component={Sample3} />
-      <Route path='/chronograph' component={Sample4} />
-      <Route path='/dashboard' component={Sample5} />
-    </div>
+const App = () =>(
+  <BrowserRouter onUpdate={() => window.scrollTo(0, 0)} >
+    <ScrollTop>
+      <Route exact path={rootPath} component={Home} />
+      <Route path={ttfPath} component={Sample1} />
+      <Route path={setoPath} component={Sample2} />
+      <Route path={shimogamoPath} component={Sample3} />
+      <Route path={chronographPath} component={Sample4} />
+      <Route path={dashboardPath} component={Sample5} />
+    </ScrollTop>
   </BrowserRouter>
-  // </Provider>
-)
+) 
 
-const Header = () => ({
-  render(){
-    return(
-      <div className>aaaa</div>
-    )
-  }
-})
+// class App extends Component{
+//   render(){
+//     const { pageTransition } = this.state;
+//     const isPageTransition = pageTransition !== "none";
+//     return (
+//       // {/* // <Provider>
+//       // //   <BrowserRouter store={store} > */}
+//       <BrowserRouter onUpdate={() => window.scrollTo(0, 0)} >
+//         <div className='background_frame'>
+//           <Route exact path={rootPath} component={Home} />
+//           <Route path={ttfPath} component={Sample1} />
+//           <Route path={setoPath} component={Sample2} />
+//           <Route path={shimogamoPath} component={Sample3} />
+//           <Route path={chronographPath} component={Sample4} />
+//           <Route path={dashboardPath} component={Sample5} />
+//         </div>
+//       </BrowserRouter>
+//     // {/* // </Provider> */}
+//     )
+//   }
+// }
 
 const Home = () => (
-  <MainVisual 
-  ttfSlides={ttfSlides}
-  shimogamoSlides = {shimogamoSlides}
-  setoSlides={setoSlides}
-  chronoSlides={chronoSlides}
-  dashboardSlides={dashboardSlides}
-  />
+  <div className='background_frame'>
+    <MainVisual 
+      ttfSlides={ttfSlides}
+      shimogamoSlides = {shimogamoSlides}
+      setoSlides={setoSlides}
+      chronoSlides={chronoSlides}
+      dashboardSlides={dashboardSlides}
+    />
+  </div>
 )
 
 const Sample1 = () => (
-  <TTFConverter captures={ttfSlides}/>
+  <div>
+    <Header hide={ttfPath}/>
+    <TTFConverter captures={ttfSlides}/>
+  </div>
 )
 
 const Sample2 = () => (
-  <Setogreen captures={setoSlides}/>
+  <div>
+    <Header hide={setoPath}/>
+    <Setogreen captures={setoSlides}/>
+  </div>
 )
 
 const Sample3 = () => (
-  <Shimogamodeli captures={shimogamoSlides}/>
+  <div>
+    <Header hide={shimogamoPath}/>
+    <Shimogamodeli captures={shimogamoSlides}/>
+  </div>
 )
 
 const Sample4 = () => (
-  <Chronograph captures={chronoSlides}/>
+  <div>
+    <Header hide={chronographPath}/>
+    <Chronograph captures={chronoSlides}/>
+  </div>
 )
 
 const Sample5 = () => (
-  <Dashboard captures={dashboardSlides}/>
+  <div>
+    <Header hide={dashboardPath}/>
+    <Dashboard captures={dashboardSlides}/>
+  </div>
 )
 
 export default App;

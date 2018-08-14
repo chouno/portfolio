@@ -17,6 +17,36 @@
 	visibility: visible;
 }
 
+.root_header{
+	background: rgba(255,255,255,0.8);
+	padding: 0px 60px;
+	height: 60px;
+	line-height: 60px;
+	position: fixed;
+}
+
+.header_link_container{
+	display: table;
+	table-layout: fixed;
+	width: 100%;
+}
+
+.header_link_container li{
+	display: table-cell;
+	text-align: center;
+}
+
+.header_link_container li a{
+	text-decoration: none;
+	color: #666;
+	font-size: 15px;
+	transition: color 0.2s;
+}
+.header_link_container li a:hover,
+.header_link_container li.selected a{
+	color: #2F91FF;
+}
+
 .sign {
 	padding: 24px;
 	position: relative;
@@ -58,7 +88,7 @@
 	animation-iteration-count: 1;
 	-webkit-animation-fill-mode: forwards;
 	animation-fill-mode: forwards;
-	/* display: none; */
+	display: none;
 }
 
 .play_button.stop{
