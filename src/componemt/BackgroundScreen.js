@@ -26,7 +26,11 @@ export class BackgroundScreen extends Component {
             clearTimeout(this.timeoutFunc);
         }else{
             this.timeoutFunc = setTimeout(function(){
-                console.log('slide');
+                if(this.props.autoPlay&&(this.state.currentImage+1>=this.props.photos.length)){
+                    clearTimeout(this.timeoutFunc);
+                    this.props.nextPlay();
+                    return;
+                }
                 this.setState({
                     currentImage: (this.state.currentImage + 1 < this.props.photos.length) ? this.state.currentImage + 1:0
                 })

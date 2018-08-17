@@ -1,3 +1,7 @@
+:root{
+    --keyvisual_height:160px;
+}
+
 .detail_wrapper{
     padding: 0 0px 30px;
     text-align: center;
@@ -5,11 +9,12 @@
     top: 0;
     z-index: -1;
     width: 100%;
+    padding-top: var(--keyvisual_height);
 }
 
 .detail_title{
-    font-size: 46px;
-    margin: 60px 0 40px;
+    font-size: 32px;
+    margin: 10px 0 60px;
 }
 
 .detail_header{
@@ -22,9 +27,17 @@
     background-size: cover;
     box-sizing: border-box;
     width: 100%;
+    position: fixed;
+    z-index: -1;
+    top: 0;
     margin:0 0px;
-    height: 200px;
-    border-bottom: 1px solid #000;
+    height: var(--keyvisual_height);
+}
+
+.detail_content_wrapper{
+    background-color: white;
+    padding-top: 70px;
+    border-top: 1px solid;
 }
 
 .frameworks,
@@ -58,6 +71,7 @@
 .pc_wrapper{
     display: inline-block;
     margin: 0 26px;
+    max-width: 1400px;
 }
 
 .detail_wrapper .pc{
@@ -81,7 +95,7 @@
     position: absolute;
     width: 16px;
     height:16px;
-    border: 2px solid #333;
+    border: 1px solid #333;
     border-radius: 50%;
     top: 10px;
     z-index: 1;

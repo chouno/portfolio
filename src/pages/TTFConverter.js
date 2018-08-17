@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import { DetailDescription } from "../componemt/DetailDescription";
+import  DetailDescription  from "../componemt/DetailDescription";
 
 const language = ['HTML','javaScript','CSS']
 const frameworks = []
@@ -15,7 +14,7 @@ export class TTFConverter extends Component {
       language:'HTML\nJavaScript\nCSS',
       color:'#333',
       main:1,
-      description:'ローカルのTTFファイルをブラウザにドラッグ&ドロップ\n解析したデータからwoff、eot、svg、CSSファイルを生成し、Zip圧縮\nダウンロードまでをJavaScriptでコントロールするWebアプリケーション',
+      description:'ローカルのTTFファイルをブラウザにドラッグ&ドロップ\n解析したデータからwoff、eot、svg、CSSファイルを生成し、Zip圧縮\nダウンロードまでをフロントエンドでコントロールするWebアプリケーション',
       captures:this.props.captures
     };
     return (

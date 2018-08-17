@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { DetailDescription } from "../componemt/DetailDescription";
+import DetailDescription from "../componemt/DetailDescription";
 
 export class Chronograph extends Component {
   componentDidMount(){
@@ -10,7 +9,6 @@ export class Chronograph extends Component {
     const data = {
       title:'3Dアニメーション',
       frameworks:'jQuery\nD3.js\nunderscore.js',
-      appName:'社内研修用年表',
       language:'HTML\nJavaScript\nCSS',
       main:1,
       color:'#333',

@@ -1,48 +1,67 @@
 import React,{ Component } from "react";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
-
+const isDeploy = true;
+const addPathPrerix='/portfolio';
+const rootPath = isDeploy?addPathPrerix+'/':'';
 export default class Header extends Component{
   constructor(props){
-    super(props)
+    super(props);
+    this.scrollHandler = this.scrollHandler.bind(this);
+    this.showHeader=false;
     this.state = {
-      hide:this.props.hide
+      hide:this.props.hide,
+      show:false
     }
   }
+  scrollHandler(){
+    const result = window.scrollY>160?true:false;
+    if(result!=this.showHeader){
+      this.showHeader = result;
+      this.forceUpdate();
+    }
+  }
+
+  changeHeaderState(result){
+    this.props.changeHeaderState(result)
+  }
+
+
+  componentDidMount(){
+    window.addEventListener('scroll',this.scrollHandler,true);
+  }
+  componentWillUnmount(){
+    window.removeEventListener('scroll',this.scrollHandler);
+  }
+  onClick(){
+
+  }
   render(){
+    const headerClass = classnames(
+      'root_header',
+      {
+        'header_show':this.showHeader
+      }
+    )
     return(
-      <div className='root_header'>
+      <div className={headerClass}>
         <ul className='header_link_container'>
-          <PerformanceLink
-            path='/'
-            title='Top'
-            hide={this.props.hide}
-          />
-          <PerformanceLink
-            path='/shimogamodeli'
-            title='設計・コーディング'
-            hide={this.props.hide}
-          />
-          <PerformanceLink
-            path='/TTFConverter'
-            title='Webフォント生成'
-            hide={this.props.hide}
-          />
-          <PerformanceLink
-            path='/setogreenEstate'
-            title='物件検索エンジン'
-            hide={this.props.hide}
-          />
-          <PerformanceLink
-            path='/chronograph'
-            title='3Dアニメーション'
-            hide={this.props.hide}
-          />
-          <PerformanceLink
-            path='/dashboard'
-            title='集計データの可視化'
-            hide={this.props.hide}
-          />
+        <PerformanceLink
+          path={rootPath}
+          title='Top'
+          hide={this.props.hide}
+        />
+        {this.props.data.map((target,index) => {
+          return(
+            <PerformanceLink
+              path={target.path}
+              title={target.title}
+              hide={this.props.hide}
+              color={target.color}
+              key={index}
+            />
+          )
+        })}
         </ul>
       </div>
     )
@@ -51,20 +70,27 @@ export default class Header extends Component{
 
 class PerformanceLink extends Component{
   render(){
-      // if(this.props.path==this.props.hide){
-      //   return null;
-      // }else{
-        const headerLink = classnames(
-          'header_link',
-          {
-            'selected':this.props.hide==this.props.path
-          }
-        )
-        return(
-          <li className={headerLink}>
-            <Link to={this.props.path}>{this.props.title}</Link>
-          </li> 
-        )
-      // }
+    const headerLink = classnames(
+      'header_link',
+      {
+        'selected':this.props.hide==this.props.path
+      }
+    )
+    return(
+      <li className={headerLink}
+        style={{
+        borderBottomColor:this.props.hide==this.props.path?this.props.color:'transparent',
+        color:this.props.hide==this.props.path?this.props.color:''
+      }}>
+        <Link to={this.props.path}>
+          {this.props.title}
+          <span className='borderSpan'
+          style={{
+            backgroundColor:this.props.hide==this.props.path?this.props.color:'transparnt'
+          }}>
+          </span>
+        </Link>
+      </li> 
+    )
   }
 }

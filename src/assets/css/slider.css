@@ -38,3 +38,9 @@
       -ms-filter: blur(var(--blur));
           filter: blur(var(--blur));
 }
+
+img.preloader{
+    width: 0px;
+    height: 0px;
+    display:none;
+}

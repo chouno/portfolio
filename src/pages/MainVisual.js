@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import classnames from "classnames";
 import { BackgroundScreen } from "../componemt/BackgroundScreen";
 import PerformanceContainer from "../componemt/PerformanceContainer";
-import $ from "jquery";
-
-let visualizeTarget;
+import Preloader from "../componemt/Preloader";
 
 export class MainVisual extends Component {
   constructor(props) {
@@ -12,83 +9,47 @@ export class MainVisual extends Component {
       this.nameAnmation = this.nameAnmation.bind(this);
       this.expandAnimation = this.expandAnimation.bind(this);
       this.playOnClick = this.playOnClick.bind(this)
-      this.lastSelectedPlayValue = false;
+      this.lastSelectedPlayValue = 0;
       this.performanceMouseEventHander = this.performanceMouseEventHander.bind(this)
-      this.performances = ['ttf',
-                          'seto',
-                          'shimogamo',
-                          'chrono',
-                          'dashboard']
+      this.allSlide=[];
+      this.ids=[];
       this.state = {
-        'name':'',
-        'isExpand':true,
-        'autoPlay':false,
-        'horizontal':false,
-        'ttf':false,
-        'seto':false,
-        'shimogamo':false,
-        'chrono':false,
-        'dashboard':false,
-        'photos':[],
-        'isShow':false,
-        'initialized':false,
-        'currentSlide':[]
+        initialized:false,
+        isExpand:true,
+        autoPlay:false,
+        currentSlide:[],
+        // performances:this.props.data,
+        currentHoverTarget:''
       };
   };
 
   componentDidMount(done) {
-    // $.ajax({
-    //   url:'performance.json',
-    //   type:'GET',
-    //   dataType:'json',
-    //   data:"",
-    //   timeout:5000
-    // })
-    // .then((...args)=>{
-    //   const [res,textStatus,jqXHR] = args;  
-    //   visualizeTarget = res;
-    //   this.setState({'name':res.name});
-    //   this.nameAnmation()
-    // })
-    // .fail((...args)=>{
-    //   const [res,textStatus,jqXHR] = args;
-    //   console.log('user data not available >> ' + jqXHR.status);
-    // })
+    this.genDisplayData();
     this.nameAnmation();
   }
 
+  genDisplayData(){
+    let allSlide = [];
+    let allID = [];
+    this.props.data.forEach((target)=>{
+      Array.prototype.push.apply(allSlide,target.captures);
+      allID.push(target.id);
+    });
+    this.allSlide = allSlide;
+    this.ids = allID;
+  }
+
   changeSlide(targetName,isShow){
-    
-    switch (targetName) {
-      case 'ttf':
-        console.log(targetName);
-        this.setState({'currentSlide':isShow?this.props.ttfSlides:[]});
-        this.setState({'ttf':isShow});
-        break;
-      case 'seto':
-        console.log(targetName);
-        this.setState({'currentSlide':isShow?this.props.setoSlides:[]});
-        this.setState({'seto':isShow})
-        break;
-      case 'shimogamo':
-        console.log(targetName);
-        this.setState({'currentSlide':isShow?this.props.shimogamoSlides:[]});
-        this.setState({'shimogamo':isShow})
-        break;
-      case 'chrono':
-        console.log(targetName);
-        this.setState({'currentSlide':isShow?this.props.chronoSlides:[]});
-        this.setState({'chrono':isShow})
-        break;
-      case 'dashboard':
-        console.log(targetName);
-        this.setState({'currentSlide':isShow?this.props.dashboardSlides:[]});
-        this.setState({'dashboard':isShow})
-        break;
-      default:
-        break;
-    }
-    this.currentSlide = isShow?targetName:''
+    let currentSlide = [];
+    this.props.data.forEach((target,index)=>{
+      if(target.name==targetName){
+        currentSlide=target.captures;
+      }
+    });
+    this.setState({currentHoverTarget:isShow?targetName:''});
+    this.setState({
+      'currentSlide':isShow?currentSlide:[]
+    });
   }
 
   playOnClick(){
@@ -98,36 +59,48 @@ export class MainVisual extends Component {
       this.setState({'isExpand':false})
       this.nextPlay();
     }else{
+      this.lastSelectedPlayValue=0;
       this.changeSlide(this.currentSlide,false)
       this.expandAnimation();
     }
   }
 
+  slideFinished(){
+
+  }
+
   performanceMouseEventHander(target,value){
-    this.setState({'horizontal':value});
-    this.expandAnimation();
-    this.changeSlide(target,value);
+    if(!this.state.autoPlay){
+      this.expandAnimation();
+      this.changeSlide(target,value);
+    }else{
+      let prev = 0;
+      this.props.data.forEach((performance,index) => {
+        if(performance.name==target){
+          prev=index-1;
+        }
+      });
+      if(prev<0){
+        prev=0;
+      }
+      this.lastSelectedPlayValue=this.ids[prev];
+      this.nextPlay();
+    }
   }
 
   nextPlay(){
-    if(!this.currentSlide||this.currentSlide==''){
-      this.currentSlide='dashboard';
+    if(this.lastSelectedPlayValue==0){
+      this.lastSelectedPlayValue=this.ids[this.ids.length-1];
     }
-    let nextValue = ''
-    const currentValue = this.currentSlide
-    this.performances.some((target,index)=>{
-      if(target==currentValue){
-        if(index==4){
-          nextValue=this.performances[0];
-        }else{
-          nextValue=this.performances[index+1];
-        }
-        return true;
-      }
-    })
+    let targetIndex = this.ids.indexOf(this.lastSelectedPlayValue)+1;
+    if(targetIndex>this.ids.length-1){
+      targetIndex=0;
+    }
+    
     this.changeSlide(this.currentSlide,false);
-    this.changeSlide(nextValue,true);
-    this.currentSlide=nextValue;
+    this.changeSlide(this.props.data[targetIndex].name,true);
+    this.lastSelectedPlayValue=this.ids[targetIndex];
+    this.currentSlide=this.props.data[targetIndex].name;
   }
 
   expandAnimation(){
@@ -141,7 +114,6 @@ export class MainVisual extends Component {
       function e(a, d, b,t6) {
         function complateProccess(targetK,targetT){
           targetK.animationComplete = !0;
-          // targetT.setState({'initialized':true});
           targetT();
         }
         var c, f, g, h;
@@ -164,11 +136,11 @@ export class MainVisual extends Component {
       }};
     }();
     
-    const test = () => {
+    const initializedComplete = () => {
       this.setState({'initialized':true});
     }
 
-    SPY.text('targetName',test)
+    SPY.text('targetName',initializedComplete)
     setTimeout(() => {
       portfolio.classList.add('from_bottom');
     }, 100);
@@ -179,7 +151,6 @@ export class MainVisual extends Component {
 
   render() {
     return (
-      // <div className={this.state.ttf?'wrapper ttf_slide':'wrapper'}>
       <div className={this.state.initialized?'wrapper initialized':'wrapper'}>
         <BackgroundScreen
         autoPlay={this.state.autoPlay}
@@ -187,7 +158,7 @@ export class MainVisual extends Component {
         photos={this.state.currentSlide}
         />
         <section className="sign">
-          <h1 id='targetName' className='userName' onClick={this.nameAnmation}>chouno yukihiko</h1>
+          <h1 id='targetName' className='userName' onClick={this.nameAnmation}>{this.props.name}</h1>
           <p id='portfolio' className='portfolio_title'>Portfolio</p>
           <button className={this.state.isExpand?'expand_button selected':'expand_button'} onClick={this.expandAnimation}>
           </button>
@@ -195,24 +166,15 @@ export class MainVisual extends Component {
           </button>
         </section>
         <PerformanceContainer
+          data={this.props.data}
           autoPlay={this.state.autoPlay}
           isExpand={this.state.isExpand}
-          shimogamo={this.state.shimogamo}
-          shimogamoOnMouseEnter={()=>this.performanceMouseEventHander('shimogamo',true)}
-          shimogamoOnMouseLeave={()=>this.performanceMouseEventHander('shimogamo',false)}
-          ttf={this.state.ttf}
-          ttfOnMouseEnter={()=>this.performanceMouseEventHander('ttf',true)}
-          ttfOnMouseLeave={()=>this.performanceMouseEventHander('ttf',false)}
-          seto={this.state.seto}
-          setoOnMouseEnter={()=>this.performanceMouseEventHander('seto',true)}
-          setoOnMouseLeave={()=>this.performanceMouseEventHander('seto',false)}
-          chrono={this.state.chrono}
-          chronoOnMouseEnter={()=>this.performanceMouseEventHander('chrono',true)}
-          chronoOnMouseLeave={()=>this.performanceMouseEventHander('chrono',false)}
-          dashboard={this.state.dashboard}
-          dashboardOnMouseEnter={()=>this.performanceMouseEventHander('dashboard',true)}
-          dashboardOnMouseLeave={()=>this.performanceMouseEventHander('dashboard',false)}
+          onMouseEnter={(performanceName,isShow)=>this.performanceMouseEventHander(performanceName,isShow)}
+          currentHoverTarget={this.state.currentHoverTarget}
         />
+        {this.allSlide.map((target,index) => {
+            return <Preloader key={index} path={target}/>
+        })}
       </div>
     );
   }

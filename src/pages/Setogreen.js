@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import { DetailDescription } from "../componemt/DetailDescription";
+import  DetailDescription  from "../componemt/DetailDescription";
 export class Setogreen extends Component {
     render() {
       const data = {

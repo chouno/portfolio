@@ -7,10 +7,10 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        loader: 'file-loader',
+        loaders: 'file-loader',
         options: {
-          name: '[path][name].[ext]'
-        },
+          name: './img/[name].[ext]'
+        }
       },
     ],
   },
