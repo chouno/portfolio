@@ -12,9 +12,8 @@ import {MainVisual} from './pages/MainVisual';
 import Header from "./componemt/Header";
 import DetailDescription from "./componemt/DetailDescription";
 
-const isDeploy = true;
-const addPathPrerix='/portfolio';
-const rootPath = isDeploy?addPathPrerix+'/':'';
+const rootPath = '/portfolio/';
+const deploy=false;
 
 export class App extends Component{
   constructor(props){
@@ -27,10 +26,10 @@ export class App extends Component{
   }
   
   componentDidMount(){
-    // fetch('../performance.json')
-    fetch('../fourPerformance.json')
+    const jsonPath=deploy?'https://chouno.github.io/portfolio/Performance_2.json':'../Performance.json'
+    fetch(jsonPath)
     .then((data)=>{
-      if(data.statusText!='OK'){
+      if(data.status!=200){
         throw Error(data);
       }
       return data;

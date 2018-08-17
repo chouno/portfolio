@@ -42,7 +42,7 @@ export class MainVisual extends Component {
   changeSlide(targetName,isShow){
     let currentSlide = [];
     this.props.data.forEach((target,index)=>{
-      if(target.name==targetName){
+      if(target.id==targetName){
         currentSlide=target.captures;
       }
     });
@@ -76,7 +76,7 @@ export class MainVisual extends Component {
     }else{
       let prev = 0;
       this.props.data.forEach((performance,index) => {
-        if(performance.name==target){
+        if(performance.id==target){
           prev=index-1;
         }
       });
@@ -98,9 +98,9 @@ export class MainVisual extends Component {
     }
     
     this.changeSlide(this.currentSlide,false);
-    this.changeSlide(this.props.data[targetIndex].name,true);
+    this.changeSlide(this.props.data[targetIndex].id,true);
     this.lastSelectedPlayValue=this.ids[targetIndex];
-    this.currentSlide=this.props.data[targetIndex].name;
+    this.currentSlide=this.props.data[targetIndex].id;
   }
 
   expandAnimation(){

@@ -1,9 +1,7 @@
 import React,{ Component } from "react";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
-const isDeploy = true;
-const addPathPrerix='/portfolio';
-const rootPath = isDeploy?addPathPrerix+'/':'';
+const rootPath = '/portfolio/';
 export default class Header extends Component{
   constructor(props){
     super(props);

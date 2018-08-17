@@ -28,7 +28,6 @@ export default class PerformaneContainer extends Component{
       }
     )
     return(
-      // <ul className={this.props.autoPlay?'performance_container horizontal from_small':'performance_container from_small'}
       <ul className={containerClass}
         style={{
           gridTemplateColumns:'repeat('+this.props.data.length+', 1fr)'
@@ -63,7 +62,7 @@ class Performance extends Component{
     if(this.props.autoPlay){
       return;
     }
-    this.props.onMouseEnter(this.props.data.name,value);
+    this.props.onMouseEnter(this.props.data.id,value);
     this.setState({
       'hover':value
     })
@@ -73,7 +72,7 @@ class Performance extends Component{
     const targetLink = this.props.data.path;
     const targetTitle = this.props.data.title;
     const targetSubTitle = this.props.data.subTitle;
-    const isShow=this.props.data.name==this.props.currentHoverTarget?true:false;
+    const isShow=this.props.data.id==this.props.currentHoverTarget?true:false;
     return(
       <li className={this.props.isExpand?'expand':''}>
         <div className={this.state.hover?'moveBox hover':'moveBox'}>
