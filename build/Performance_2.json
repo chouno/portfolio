@@ -82,6 +82,7 @@
     }
     ,
     {
+      "id":5,
       "name":"dashboard",
       "title":"集計データの視覚化",
       "path":"/portfolio/dashboard",

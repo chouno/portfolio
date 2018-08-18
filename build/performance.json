@@ -2,6 +2,7 @@
   "name":"chouno yukihiko",
   "data":[
     {
+      "id":1,
       "name":"shimogao",
       "title":"設計・コーディング",
       "path":"/portfolio/shimogamodeli",
@@ -21,6 +22,7 @@
       ]
     },
     {
+      "id":2,
       "name":"ttf",
       "path":"/portfolio/TTFConverter",
       "subTitle":"ttf→Web用ファイル一式",
@@ -40,6 +42,7 @@
       ]
     },
     {
+      "id":3,
       "path":"/portfolio/setogreenEstate",
       "subTitle":"不動産ホームページ",
       "name":"seto",
@@ -58,7 +61,9 @@
         "/assets/img/seto/detail.png",
         "/assets/img/seto/word_description.png"
       ]
-    },{
+    },
+    {
+      "id":4,
       "title":"3Dアニメーション",
       "name":"chrono",
       "subTitle":"年表を3Dで",
@@ -78,6 +83,7 @@
     }
     ,
     {
+      "id":5,
       "name":"dashboard",
       "title":"集計データの視覚化",
       "path":"/portfolio/dashboard",

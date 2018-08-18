@@ -13,7 +13,7 @@ import Header from "./componemt/Header";
 import DetailDescription from "./componemt/DetailDescription";
 
 const rootPath = '/portfolio/';
-const deploy=true;
+const deploy=false;
 
 export class App extends Component{
   constructor(props){
@@ -27,7 +27,7 @@ export class App extends Component{
   }
   
   componentDidMount(){
-    const jsonPath=deploy?'https://chouno.github.io/portfolio/Performance_2.json':'../Performance.json'
+    const jsonPath=deploy?'https://chouno.github.io/portfolio/Performance_2.json':'Performance.json'
     fetch(jsonPath)
     .then((data)=>{
       if(data.status!=200){
