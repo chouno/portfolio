@@ -9,7 +9,8 @@ export default class Header extends Component{
     this.showHeader=false;
     this.state = {
       hide:this.props.hide,
-      show:false
+      show:false,
+      mobileMenuOpen:false
     }
   }
   scrollHandler(){
@@ -31,8 +32,10 @@ export default class Header extends Component{
   componentWillUnmount(){
     window.removeEventListener('scroll',this.scrollHandler);
   }
-  onClick(){
-
+  mobileMenuOnClick(){
+    this.setState({
+      'mobileMenuOpen':!this.state.mobileMenuOpen
+    });
   }
   render(){
     const headerClass = classnames(
@@ -41,26 +44,63 @@ export default class Header extends Component{
         'header_show':this.showHeader
       }
     )
+    const mobileHeaderClass=classnames(
+      'mobile_menu',
+      {
+        'open':this.state.mobileMenuOpen
+    });
+    const modalContainerClass = classnames(
+      'modalContainer',
+      {
+        'modalShow':this.state.mobileMenuOpen
+      })
     return(
-      <div className={headerClass}>
-        <ul className='header_link_container'>
-        <PerformanceLink
-          path={rootPath}
-          title='Top'
-          hide={this.props.hide}
-        />
-        {this.props.data.map((target,index) => {
-          return(
+      <div>
+        <div className={headerClass}>
+          <ul className='header_link_container'>
+          <PerformanceLink
+            path={rootPath}
+            title='Top'
+            hide={this.props.hide}
+          />
+          {this.props.data.map((target,index) => {
+            return(
+              <PerformanceLink
+                path={target.path}
+                title={target.title}
+                hide={this.props.hide}
+                color={target.color}
+                key={index}
+              />
+            )
+          })}
+          </ul>
+        </div>
+        <button onClick={()=>this.mobileMenuOnClick()} className={mobileHeaderClass}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div className={modalContainerClass}>
+          <ul>
             <PerformanceLink
-              path={target.path}
-              title={target.title}
+              path={rootPath}
+              title='Top'
               hide={this.props.hide}
-              color={target.color}
-              key={index}
             />
-          )
-        })}
-        </ul>
+            {this.props.data.map((target,index) => {
+              return(
+                <PerformanceLink
+                  path={target.path}
+                  title={target.title}
+                  hide={this.props.hide}
+                  color={target.color}
+                  key={index}
+                />
+              )
+            })}
+          </ul>
+        </div>
       </div>
     )
   }
@@ -84,7 +124,8 @@ class PerformanceLink extends Component{
           {this.props.title}
           <span className='borderSpan'
           style={{
-            backgroundColor:this.props.hide==this.props.path?this.props.color:'transparnt'
+            backgroundColor:this.props.hide==this.props.path?this.props.color:'transparnt',
+            borderColor:this.props.hide==this.props.path?this.props.color:'transparnt'
           }}>
           </span>
         </Link>

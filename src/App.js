@@ -13,7 +13,7 @@ import Header from "./componemt/Header";
 import DetailDescription from "./componemt/DetailDescription";
 
 const rootPath = '/portfolio/';
-const deploy=false;
+const deploy=true;
 
 export class App extends Component{
   constructor(props){
@@ -21,7 +21,8 @@ export class App extends Component{
     this.converted = false;
     this.state = {
       data:[],
-      name:''
+      name:'',
+      showModal:false
     }
   }
   
@@ -45,6 +46,13 @@ export class App extends Component{
       console.log('E1 fetch >> '+error);
     })
   }
+
+  menuModalFade(val){
+    this.setState({
+      'menuModalFade':val
+    })
+  }
+
   render(){
     if(this.state.name==''){
       return null;
@@ -55,7 +63,7 @@ export class App extends Component{
           <Route exact path={rootPath} render={()=><Home name={this.state.name} data={this.state.data}/>}/>
            {this.state.data.map((target,index) => {
              return (
-              <Route exact path={target.path} key={index} render={()=><div><Header data={userData} hide={target.path}/><DetailContainer data={target}/></div>}/>
+              <Route exact path={target.path} key={index} render={()=><div><Header menuModalFade={(val)=>this.menuModalFade(val)} data={userData} hide={target.path}/><DetailContainer modalShow={this.state.showModal} data={target}/></div>}/>
              )
             })}
         </ScrollTop>
