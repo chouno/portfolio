@@ -9,9 +9,9 @@
     display: table;
     transition: all 300ms;
     -webkit-filter: blur(var(--blur));
-     -moz-filter: blur(var(--blur));
-      -ms-filter: blur(var(--blur));
-          filter: blur(var(--blur));
+       -moz-filter: blur(var(--blur));
+        -ms-filter: blur(var(--blur));
+            filter: blur(var(--blur));
     background-repeat: no-repeat;
     background-position: center top;
     background-size: cover;
@@ -19,8 +19,8 @@
     -webkit-transition: all 800ms;
     -o-transition: all 800ms;
     transition: all 800ms;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    /* -webkit-backface-visibility: hidden;
+    backface-visibility: hidden; */
 }
 
 .slide_container img{
@@ -34,9 +34,9 @@
     left:50%;
     transform: translateX(-50%) translateY(0%);
     -webkit-filter: blur(var(--blur));
-     -moz-filter: blur(var(--blur));
-      -ms-filter: blur(var(--blur));
-          filter: blur(var(--blur));
+       -moz-filter: blur(var(--blur));
+        -ms-filter: blur(var(--blur));
+            filter: blur(var(--blur));
 }
 
 img.preloader{

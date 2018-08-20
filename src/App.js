@@ -27,7 +27,7 @@ export class App extends Component{
   }
   
   componentDidMount(){
-    const jsonPath=deploy?'https://chouno.github.io/portfolio/Performance_2.json':'Performance.json'
+    const jsonPath=deploy?'https://chouno.github.io/portfolio/Performance_2.json':'../Performance.json'
     fetch(jsonPath)
     .then((data)=>{
       if(data.status!=200){
