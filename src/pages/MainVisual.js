@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BackgroundScreen } from "../componemt/BackgroundScreen";
 import PerformanceContainer from "../componemt/PerformanceContainer";
 import Preloader from "../componemt/Preloader";
+import Classnames from 'classnames'
 
 export class MainVisual extends Component {
   constructor(props) {
@@ -17,8 +18,8 @@ export class MainVisual extends Component {
         initialized:false,
         isExpand:true,
         autoPlay:false,
+        pause:false,
         currentSlide:[],
-        // performances:this.props.data,
         currentHoverTarget:''
       };
   };
@@ -53,15 +54,16 @@ export class MainVisual extends Component {
   }
 
   playOnClick(){
-    this.setState({"autoPlay":!this.state.autoPlay})
-    const nextValue = !this.state.autoPlay
-    if(nextValue){
+    const currentValue = this.state.autoPlay;
+    if(!currentValue){
+      this.setState({"autoPlay":!this.state.autoPlay})
+      this.state.pause = false;
       this.setState({'isExpand':false})
       this.nextPlay();
     }else{
-      this.lastSelectedPlayValue=0;
-      this.changeSlide(this.currentSlide,false)
-      this.expandAnimation();
+      this.setState({
+        'pause':!this.state.pause
+      })
     }
   }
 
@@ -101,6 +103,18 @@ export class MainVisual extends Component {
     this.changeSlide(this.props.data[targetIndex].id,true);
     this.lastSelectedPlayValue=this.ids[targetIndex];
     this.currentSlide=this.props.data[targetIndex].id;
+  }
+
+  closedFigureOnClick(target){
+    this.state.pause=false;
+    this.refs.bgSc.forceSlideChange();
+    let targetIndex = this.ids.indexOf(target)-1;
+    if(targetIndex<0){
+      targetIndex = this.ids.length-1;
+    }
+    this.lastSelectedPlayValue=this.ids[targetIndex];
+    this.currentSlide=this.props.data[targetIndex].id;
+    this.nextPlay();
   }
 
   expandAnimation(){
@@ -149,28 +163,57 @@ export class MainVisual extends Component {
   componentDidEnter() {
   }
 
+  stopSlideOnClick(){
+    this.setState({"autoPlay":false})
+    this.lastSelectedPlayValue=0;
+    this.state.pause = false;
+    this.changeSlide(this.currentSlide,false)
+    this.expandAnimation();
+  }
+
   render() {
+    const controllerClassName = Classnames(
+      'controller_container',
+      {
+        'playing':this.state.autoPlay,
+        'hide':this.state.currentHoverTarget!=''&&!this.state.autoPlay
+      }
+    )
     return (
       <div className={this.state.initialized?'wrapper initialized':'wrapper'}>
         <BackgroundScreen
         autoPlay={this.state.autoPlay}
         nextPlay={()=>this.nextPlay()}
         photos={this.state.currentSlide}
+        pause={this.state.pause}
+        ref='bgSc'
         />
         <section className="sign">
           <h1 id='targetName' className='userName' onClick={this.nameAnmation}>{this.props.name}</h1>
           <p id='portfolio' className='portfolio_title'>Portfolio</p>
-          <button className={this.state.isExpand?'expand_button selected':'expand_button'} onClick={this.expandAnimation}>
-          </button>
-          <button className={this.state.autoPlay?'play_button stop':'play_button'} onClick={this.playOnClick}>
-          </button>
+          <div className={controllerClassName}>
+            <button 
+            className={this.state.isExpand?'expand_button selected':'expand_button'} 
+            onClick={this.expandAnimation}>
+            </button>
+            <button 
+            className={this.state.autoPlay&&!this.state.pause?'play_button stop':'play_button'} 
+            onClick={this.playOnClick}>
+            </button>
+            <button 
+            className={this.state.autoPlay?'pause_button stop':'pause_button'}
+            onClick={()=>this.stopSlideOnClick()}>
+            </button>
+          </div>
         </section>
         <PerformanceContainer
           data={this.props.data}
           autoPlay={this.state.autoPlay}
           isExpand={this.state.isExpand}
+          pause={this.state.pause}
           onMouseEnter={(performanceName,isShow)=>this.performanceMouseEventHander(performanceName,isShow)}
           currentHoverTarget={this.state.currentHoverTarget}
+          closedFigureOnClick={(target)=>this.closedFigureOnClick(target)}
         />
         {this.allSlide.map((target,index) => {
             return <Preloader key={index} path={target}/>

@@ -23,6 +23,13 @@
     backface-visibility: hidden; */
 }
 
+.slide_container.isClear{
+    -webkit-filter: blur(0);
+       -moz-filter: blur(0);
+        -ms-filter: blur(0);
+            filter: blur(0);
+}
+
 .slide_container img{
     text-align: center;
     display: table-cell;

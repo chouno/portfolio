@@ -61,11 +61,11 @@ export class App extends Component{
       return(
         <ScrollTop>
           <Route exact path={rootPath} render={()=><Home name={this.state.name} data={this.state.data}/>}/>
-           {this.state.data.map((target,index) => {
-             return (
-              <Route exact path={target.path} key={index} render={()=><div><Header menuModalFade={(val)=>this.menuModalFade(val)} data={userData} hide={target.path}/><DetailContainer modalShow={this.state.showModal} data={target}/></div>}/>
-             )
-            })}
+          {this.state.data.map((target,index) => {
+            return (
+            <Route exact path={target.path} key={index} render={()=><div><Header menuModalFade={(val)=>this.menuModalFade(val)} data={userData} hide={target.path}/><DetailContainer modalShow={this.state.showModal} data={target}/></div>}/>
+            )
+          })}
         </ScrollTop>
       )
     } 

@@ -76,7 +76,9 @@ export default class Header extends Component{
           })}
           </ul>
         </div>
-        <button onClick={()=>this.mobileMenuOnClick()} className={mobileHeaderClass}>
+        <button
+         onClick={()=>this.mobileMenuOnClick()}
+         className={mobileHeaderClass}>
           <span></span>
           <span></span>
           <span></span>

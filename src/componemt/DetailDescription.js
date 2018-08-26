@@ -4,7 +4,9 @@ export default class DetailDescription extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            delete:false
+            delete:false,
+            keyVisualOnMouseEvent:false
+
         };
     }
     
@@ -16,10 +18,11 @@ export default class DetailDescription extends Component{
         }
         return(
             <div className='detail_wrapper'>
-                <div className='header_keyvisual'
-                    style={{
-                        backgroundImage: this.props.data.captures.length>0?`url(${this.props.data.captures[targetIndex]})`:''
-                    }}
+                <div 
+                className='header_keyvisual'
+                style={{
+                    backgroundImage: this.props.data.captures.length>0?`url(${this.props.data.captures[targetIndex]})`:''
+                }}
                  ></div>
                  <div className='detail_content_wrapper'
                     style={{

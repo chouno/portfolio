@@ -21,11 +21,20 @@ export class BackgroundScreen extends Component {
         clearTimeout(this.timeoutFunc);
     }
 
+    forceSlideChange(){
+        this.state.currentImage = 0;
+        clearTimeout(this.timeoutFunc);
+    }
+
     autoSlidePhoto(){
         if(!this.props.photos||this.props.photos.length==0){
             clearTimeout(this.timeoutFunc);
         }else{
             this.timeoutFunc = setTimeout(function(){
+                if(this.props.autoPlay&&this.props.pause){
+                    this.autoSlidePhoto();
+                    return;
+                }
                 if(this.props.autoPlay&&(this.state.currentImage+1>=this.props.photos.length)){
                     clearTimeout(this.timeoutFunc);
                     this.props.nextPlay();
@@ -60,7 +69,8 @@ export class BackgroundScreen extends Component {
             let sliderClass = ClassNames(
                 'slide_container',
                 {
-                    'from_small_instantry':isFirstSlide
+                    'from_small_instantry':isFirstSlide&&!this.props.autoPlay,
+                    'isClear':this.props.pause
                 }
             )
             if(isFirstSlide){

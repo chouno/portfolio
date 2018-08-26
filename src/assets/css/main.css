@@ -36,35 +36,64 @@
 	color: #999;
 }
 
-.play_button{
+.controller_container{
+	position: absolute;
+	right: 84px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 56px;
+	height: 40px;
+	background: rgba(255,255,255,0.4);
+}
+
+.controller_container.hide{
+	opacity: 0;
+	pointer-events: none;
+}
+
+.controller_container.playing{
+	width:100px;
+	right: 40px;
+}
+
+.play_button,
+.pause_button{
 	box-sizing: border-box;
 	width: 20px;
 	height: 20px;
 	border-color: transparent transparent transparent #000;
 	border-style: solid;
-	border-width: 10px 0 10px 20px;
 	position: absolute;
-	right: 100px;
 	top: 50%;
 	transform: translateY(-50%);
-	transition: all 0.4s;
+	transition: all 0.2s;
+	opacity: 1;
+}
+
+.play_button{
+	border-width: 10px 0 10px 20px;
+	left:20px;
+}
+
+.pause_button{
+	border-width: 10px 10px 10px 10px;
+	border-color: #c55500;
+	right: 16px;
 	opacity: 0;
-	animation-name: show;
-	-webkit-animation-name: show;
-	-webkit-animation-duration: 0.4s;
-	animation-duration: 0.4s;
-	-webkit-animation-delay: 1s;
-	animation-delay: 1s;
-	-webkit-animation-iteration-count: 1;
-	animation-iteration-count: 1;
-	-webkit-animation-fill-mode: forwards;
-	animation-fill-mode: forwards;
-	/* display: none; */
+	pointer-events: none;
+}
+
+.pause_button.stop{
+	opacity: 1;
+	pointer-events: inherit;
+
 }
 
 .play_button.stop{
-	border-width: 10px 10px 10px 10px;
-	border-color: #c55500;
+	/* border-width: 10px 10px 10px 10px;
+	border-color: #c55500; */
+	border-width: 0px 0 0px 16px;
+	border-style: double;
 }
 
 .expand_button {
@@ -116,7 +145,6 @@
 }
 .background_frame {
 	position: fixed;
-	/* overflow-y: auto; */
 	width: 100%;
 	height: 100%;
 	min-height: 100%;
@@ -172,6 +200,21 @@
 	transition: all 0.2s;
 }
 
+.link_disabled_layer{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	background-color: rgba(0,0,0,0);
+	width: 60px;
+	height: 60px;
+	display: none;
+}
+
+.displayBlock{
+	display: block;
+}
+
 .performance_container li:nth-child(2n) .case{
 	bottom:0;
 }
@@ -213,7 +256,6 @@
 	border: 6px solid;
 }
 
-/* .performance_container li figure:hover p, */
 .performance_container li.expand figure p,
 .performance_container li figure.hover p {
 	-webkit-animation-name: from_small2;
@@ -227,7 +269,7 @@
 	-webkit-animation-fill-mode: forwards;
 	animation-fill-mode: forwards;
 }
-/* TODO クラス依存ではなくデータから色を受け取って表示する ここまで*/
+
 .performance_container li:nth-child(1) {
 	grid-column: 1/2;
 }
@@ -286,26 +328,25 @@
 	.performance_container li:nth-child(5) {
 		grid-column: 1/1;
 	}
-	.performance_container li figure {
-		/* width: var(--box_size_L);
+	/* .performance_container li figure {
+		width: var(--box_size_L);
 		height: var(--box_size_L);
 		border-radius: 50%;
 		background-color: white;
 		border: 6px solid;
-		box-sizing: border-box; */
-	}
-	
+		box-sizing: border-box;
+	} */
 	.performance_container li {
 		min-height: 280px;
 	}
-	.performance_container.horizontal li.expand figure:not(.hover) p {
-		/* opacity: 1; */
-		/* -webkit-animation-name: none;
-		animation-name: none; */
-	}
-	
+	/* .performance_container.horizontal li.expand figure:not(.hover) p {
+		opacity: 1;
+		-webkit-animation-name: none;
+		animation-name: none;
+	} */
 	.expand_button,
-	.play_button {
+	.play_button,
+	.pause_button {
 		display: none;
 	}
 	.sign {

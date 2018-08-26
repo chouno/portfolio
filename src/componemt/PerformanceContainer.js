@@ -18,6 +18,11 @@ export default class PerformaneContainer extends Component{
   onMouseLeave(target,isShow){
     this.props.onMouseEnter(target,isShow);
   }
+
+  closedFigureOnClick(target){
+    this.props.closedFigureOnClick(target);
+  }
+
   render(){
     const containerClass=Classnames(
       'performance_container',
@@ -40,8 +45,10 @@ export default class PerformaneContainer extends Component{
               isExpand={this.props.isExpand}
               onMouseEnter={(performanceName,isShow)=>this.onMouseEnter(performanceName,isShow)}
               onMouseLeave={(performanceName,isShow)=>this.onMouseLeave(performanceName,isShow)}
+              closedFigureOnClick={(performanceName)=>this.closedFigureOnClick(performanceName)}
               currentHoverTarget={this.props.currentHoverTarget}
               autoPlay={this.props.autoPlay}
+              pause={this.props.pause}
               key={index}
             />
           )
@@ -68,19 +75,29 @@ class Performance extends Component{
     })
   }
 
+  figureOnClick(){
+    const isShow=this.props.data.id==this.props.currentHoverTarget?true:false;
+    const linkDisabled = this.props.autoPlay&&!this.props.isExpand&&!isShow;
+    if(linkDisabled){
+      this.props.closedFigureOnClick(this.props.data.id);
+    }
+  }
+
   render(){
     const targetLink = this.props.data.path;
     const targetTitle = this.props.data.title;
     const targetSubTitle = this.props.data.subTitle;
     const isShow=this.props.data.id==this.props.currentHoverTarget?true:false;
+    const linkDisabled = this.props.autoPlay&&!this.props.isExpand&&!isShow;
     return(
       <li className={this.props.isExpand?'expand':''}>
         <div className={this.state.hover?'moveBox hover':'moveBox'}>
           <div className='case'>
-            <Link to={targetLink}>
+            <Link to={linkDisabled?'#':targetLink}>
             <figure className={isShow?'hover':''}
               onMouseEnter={()=>this.onMouseAction(true)}
               onMouseLeave={()=>this.onMouseAction(false)}
+              onClick={()=>this.figureOnClick()}
               style={{
                 borderColor:(this.props.isExpand||isShow)?this.props.data.color:'#000'
               }}>
