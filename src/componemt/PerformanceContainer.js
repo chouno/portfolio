@@ -89,12 +89,17 @@ class Performance extends Component{
     const targetSubTitle = this.props.data.subTitle;
     const isShow=this.props.data.id==this.props.currentHoverTarget?true:false;
     const linkDisabled = this.props.autoPlay&&!this.props.isExpand&&!isShow;
+    const pauseState=this.props.autoPlay&&isShow&&this.props.pause;
+    const figureClassNames=Classnames({
+      'hover':isShow,
+      'paused':pauseState
+    })
     return(
       <li className={this.props.isExpand?'expand':''}>
         <div className={this.state.hover?'moveBox hover':'moveBox'}>
           <div className='case'>
             <Link to={linkDisabled?'#':targetLink}>
-            <figure className={isShow?'hover':''}
+            <figure className={figureClassNames}
               onMouseEnter={()=>this.onMouseAction(true)}
               onMouseLeave={()=>this.onMouseAction(false)}
               onClick={()=>this.figureOnClick()}

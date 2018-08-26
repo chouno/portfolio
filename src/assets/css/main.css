@@ -256,6 +256,11 @@
 	border: 6px solid;
 }
 
+.performance_container li figure.hover.paused{
+	transform: translateX(-50%) translateY(-50%) scale(0.9,0.9);
+	filter: blur(1px);
+}
+
 .performance_container li.expand figure p,
 .performance_container li figure.hover p {
 	-webkit-animation-name: from_small2;
