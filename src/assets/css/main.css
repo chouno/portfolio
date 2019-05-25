@@ -90,8 +90,6 @@
 }
 
 .play_button.stop{
-	/* border-width: 10px 10px 10px 10px;
-	border-color: #c55500; */
 	border-width: 0px 0 0px 16px;
 	border-style: double;
 }
@@ -133,7 +131,6 @@
 	display: grid;
 	grid-gap: 0;
 	grid-template-rows: auto 3fr;
-	/* overflow-y: auto; */
 	position: relative;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -239,12 +236,13 @@
 	width: 100%;
 	perspective: 300;
 }
+
 .performance_container li figure p span {
 	color: #666;
-	display: inline-block;
-	font-size: 13px;
-	font-weight: normal;
-	margin-top: 6px
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 9px;
 }
 
 .performance_container li figure.hover,
@@ -272,7 +270,8 @@
 	-webkit-animation-iteration-count: 1;
 	animation-iteration-count: 1;
 	-webkit-animation-fill-mode: forwards;
-	animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  font-size: 18px;
 }
 
 .performance_container li:nth-child(1) {
@@ -316,7 +315,6 @@
 	top:0;
 }
 
-/* スライドショー用 ここまで*/
 @media (max-width: 767px) {
 	.wrapper {
 		display: block;
@@ -377,7 +375,6 @@
 		bottom:auto;
 	}
 
-	/* スライド用 */
 	.performance_container.horizontal li:nth-child(2n+1) .moveBox,
 	.performance_container.horizontal.even li .moveBox{
 		transform: translateX(-50%) translateY(0%);
@@ -401,6 +398,5 @@
 	.performance_container.even li:not(.expand) .moveBox:not(.hover) .case{
 		top:40%;
 	}
-	/* スライド用ここまで */
 }
 @media (max-width: 467px) {}
