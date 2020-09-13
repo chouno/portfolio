@@ -13,7 +13,7 @@ import Header from "./componemt/Header";
 import DetailDescription from "./componemt/DetailDescription";
 
 const rootPath = '/portfolio/';
-const deploy=true;
+const deploy=false;
 
 export class App extends Component{
   constructor(props){

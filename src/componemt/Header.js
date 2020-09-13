@@ -128,7 +128,7 @@ class PerformanceLink extends Component{
           style={{
             // backgroundColor:this.props.hide==this.props.path?this.props.color:'transparnt',
             backgroundColor:this.props.hide=='transparnt',
-            border:'dashed 2px transparent',
+            border:'dashed 3px transparent',
             borderColor:this.props.hide==this.props.path?this.props.color:'transparnt'
           }}>
           </span>
