@@ -71,7 +71,7 @@
       "language":"HTML\nJavaScript\nCSS",
       "path":"/portfolio/chronograph",
       "main":1,
-      "color":"#adadad",
+      "color":"#DDD",
       "description":"社内研修用の年表Webサービスを3Dで表現しました\n事案に参加したメンバー、関係のあるライブラリ(フレームワーク等)をダイアグラムで表示し、\n関係性の軸をメンバーやフレームワークに切り替えられるようにしました",
       "captures":[
         "/assets/img/history/top.png",
@@ -88,7 +88,7 @@
       "title":"集計データの視覚化",
       "path":"/portfolio/dashboard",
       "subTitle":"分析用ダッシュボード",
-      "frameworks":"jQuery\nAngularJS\nNodeJS\nLoopBack\nunderscore.js\nhighcharts.js\namCharts.js",
+      "frameworks":"jQuery\nAngularJS\nNodeJS\nunderscore.js\nhighcharts.js\namCharts.js",
       "appName":"社内研修用年表",
       "language":"HTML\nJavaScript\nCoffeeScript\nCSS",
       "color":"#368DC3",
@@ -99,7 +99,8 @@
         "/assets/img/dashboard/dashboard2.png",
         "/assets/img/dashboard/pie.png",
         "/assets/img/dashboard/user.png",
-        "/assets/img/dashboard/report.png"
+        "/assets/img/dashboard/report.png",
+        "/assets/img/dashboard/ship.gif"
       ]
     }
   ]
