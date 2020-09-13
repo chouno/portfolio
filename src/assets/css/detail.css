@@ -1,5 +1,5 @@
 :root{
-    --keyvisual_height:160px;
+    --keyvisual_height:420px;
 }
 
 .detail_wrapper{
@@ -13,8 +13,11 @@
 }
 
 .detail_title{
-    font-size: 32px;
-    margin: 10px 0 60px;
+  font-size: 32px;
+  margin: 10px 0 60px;
+  font-feature-settings: 'palt';
+  text-align: center;
+  letter-spacing: 0.1em;
 }
 
 .detail_header{
@@ -31,13 +34,13 @@
     z-index: -1;
     top: 0;
     margin:0 0px;
-    height: var(--keyvisual_height);
+    height: calc(100px + var(--keyvisual_height));
 }
 
 .detail_content_wrapper{
     background-color: white;
     padding-top: 70px;
-    border-top: 1px solid;
+    border-top: 4px solid;
 }
 
 .frameworks,
@@ -45,7 +48,7 @@
     font-size: 16px;
     letter-spacing: 1px;
     white-space: pre-wrap;
-    font-family: serif;
+    font-family: "游明朝体","Yu Mincho",YuMincho,"Hiragino Mincho ProN","Hiragino Mincho Pro","ＭＳ Ｐ明朝","MS PMincho","MS 明朝",sans-serif;
     font-style: italic;
 }
 
@@ -61,6 +64,7 @@
     margin: 60px;
     font-size: 16px;
     white-space: pre-wrap;
+    line-height: 1.8;
 }
 
 .framework_container{

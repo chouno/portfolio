@@ -155,7 +155,3 @@ export default class HeaderPhoto extends Component {
     );
   }
 }
-
-
-// WEBPACK FOOTER //
-// ./src/js/components/header_photo.js

@@ -181,6 +181,7 @@ export class MainVisual extends Component {
     )
     return (
       <div className={this.state.initialized?'wrapper initialized':'wrapper'}>
+        <canvas id="floating_canvas"/>
         <BackgroundScreen
         autoPlay={this.state.autoPlay}
         nextPlay={()=>this.nextPlay()}
@@ -189,7 +190,7 @@ export class MainVisual extends Component {
         ref='bgSc'
         />
         <section className="sign">
-          <h1 id='targetName' className='userName' onClick={this.nameAnmation}>{this.props.name}</h1>
+          <h1 id='targetName' className='userName serif' onClick={this.nameAnmation}>{this.props.name}</h1>
           <p id='portfolio' className='portfolio_title'>Portfolio</p>
           <div className={controllerClassName}>
             <button 

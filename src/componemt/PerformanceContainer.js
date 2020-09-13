@@ -108,7 +108,7 @@ class Performance extends Component{
               }}>
                 <p>{targetTitle}
                 <br/>
-                  <span>{targetSubTitle}</span>
+                  <span className="serif">{targetSubTitle}</span>
                 </p>
               </figure>
             </Link>

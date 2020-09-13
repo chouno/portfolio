@@ -53,7 +53,7 @@ export default class Header extends Component{
       'modalContainer',
       {
         'modalShow':this.state.mobileMenuOpen
-      })
+      });
     return(
       <div>
         <div className={headerClass}>
@@ -126,7 +126,9 @@ class PerformanceLink extends Component{
           {this.props.title}
           <span className='borderSpan'
           style={{
-            backgroundColor:this.props.hide==this.props.path?this.props.color:'transparnt',
+            // backgroundColor:this.props.hide==this.props.path?this.props.color:'transparnt',
+            backgroundColor:this.props.hide=='transparnt',
+            border:'dashed 2px transparent',
             borderColor:this.props.hide==this.props.path?this.props.color:'transparnt'
           }}>
           </span>
