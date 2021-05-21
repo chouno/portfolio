@@ -79,6 +79,27 @@
         "/portfolio/assets/img/history/detail1.png",
         "/portfolio/assets/img/history/detail2.png"
       ]
+    } ,
+    {
+      "id":5,
+      "name":"dashboard",
+      "title":"集計データの視覚化",
+      "path":"/portfolio/dashboard",
+      "subTitle":"分析用ダッシュボード",
+      "frameworks":"jQuery\nAngularJS\nNodeJS\nLoopBack\nunderscore.js\nhighcharts.js\namCharts.js",
+      "appName":"社内研修用年表",
+      "language":"HTML\nJavaScript\nCoffeeScript\nCSS",
+      "color":"#368DC3",
+      "main":0,
+      "description":"外食産業企業の売り上げ分析Webアプリケーションを実装しました\n比較する凡例を組織レベルから店舗レベルまで選択でき、\n集計対象を地域、年代、性別等、用途に合わせた属性で絞り込めます\n\n集計結果をCSVファイルとして出力\n選択された集計条件をファイルとして登録し、他のユーザーと共有できます\n\n※画像はサンプルです",
+      "captures":[
+        "/portfolio/assets/img/dashboard/dashboard1.png",
+        "/portfolio/assets/img/dashboard/dashboard2.png",
+        "/portfolio/assets/img/dashboard/pie.png",
+        "/portfolio/assets/img/dashboard/user.png",
+        "/portfolio/assets/img/dashboard/report.png",
+        "/portfolio/assets/img/dashboard/ship.gif"
+      ]
     }
   ]
 }
